@@ -1,0 +1,153 @@
+name: Tsumi To Batsu (Japanese)
+sha1: 581297b9d5c3a4c33169ae0aae218c742cd9cbcf
+options:
+  basename: tsumitobatsu
+  target_path: baserom.z64
+  elf_path: build/tsumitobatsu.elf
+  base_path: .
+  platform: n64
+  compiler: IDO
+
+  # asm_path: asm
+  # src_path: src
+  # build_path: build
+  # create_asm_dependencies: True
+
+  ld_script_path: tsumitobatsu.ld
+  ld_dependencies: True
+
+  find_file_boundaries: True
+  header_encoding: ASCII
+
+  o_as_suffix: True
+  use_legacy_include_asm: False
+  mips_abi_float_regs: o32
+
+  # section_order: [".text", ".data", ".rodata", ".bss"]
+  # auto_link_sections: [".data", ".rodata", ".bss"]
+
+  symbol_addrs_path:
+    - symbol_addrs.txt
+  reloc_addrs_path:
+    - reloc_addrs.txt
+
+  # undefined_funcs_auto_path: undefined_funcs_auto.txt
+  # undefined_syms_auto_path: undefined_syms_auto.txt
+
+  extensions_path: tools/splat_ext
+
+  # string_encoding: ASCII
+  # data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  # libultra_symbols: True
+  # hardware_regs: True
+  # gfx_ucode: # one of [f3d, f3db, f3dex, f3dexb, f3dex2]
+segments:
+  - name: header
+    type: header
+    start: 0x0
+
+  - name: ipl3
+    type: bin
+    start: 0x40
+
+  - name: entry
+    type: code
+    start: 0x1000
+    vram: 0x80025C00
+    subsegments:
+      - [0x1000, hasm]
+
+  - name: main
+    type: code
+    start: 0x1050
+    vram: 0x80025C50
+    follows_vram: entry
+    subsegments:
+      - [0x1050, asm, boot]
+      - [0x18B50, asm]
+      - [0x18BD0, asm]
+      - [0x18CC0, asm]
+      - [0x196A0, asm]
+      - [0x19730, asm]
+      - [0x19860, asm]
+      - [0x19C50, asm]
+      - [0x19DC0, asm]
+      - [0x19FB0, asm]
+      - [0x1A050, asm]
+      - [0x1A1D0, asm]
+      - [0x1A590, asm]
+      - [0x1A680, asm]
+      - [0x1A730, asm]
+      - [0x1A750, asm]
+      - [0x1A890, asm]
+      - [0x1A930, asm]
+      - [0x1B160, asm]
+      - [0x1BC70, asm]
+      - [0x1BD80, asm]
+      - [0x1CA50, asm]
+      - [0x1CE70, asm]
+      - [0x1DA10, asm]
+      - [0x1DB90, asm]
+      - [0x1DBD0, asm]
+      - [0x1DC20, asm]
+      - [0x1DC60, asm]
+      - [0x1E2A0, asm]
+      - [0x1E2B0, asm]
+      - [0x1E350, asm]
+      - [0x1E480, asm]
+      - [0x1E500, asm]
+      - [0x1E530, asm]
+      - [0x1E7B0, asm]
+      - [0x1EAC0, asm]
+      - [0x1EB20, asm]
+      - [0x1EB30, asm]
+      - [0x1EF00, asm]
+      - [0x1F4D0, asm]
+      - [0x1F600, asm]
+      - [0x1F7C0, asm]
+      - [0x204A0, asm]
+      - [0x20F80, asm]
+      - [0x20FE0, asm]
+      - [0x21120, asm]
+      - [0x21250, asm]
+      - [0x21430, asm]
+      - [0x21450, asm]
+      - [0x214F0, asm]
+      - [0x21500, asm]
+      - [0x21510, asm]
+      - [0x21520, asm]
+      - [0x21530, asm]
+      - [0x21580, asm]
+      - [0x21660, asm]
+      - [0x218A0, asm]
+      - [0x218C0, asm]
+      - [0x21910, asm]
+      - [0x22340, asm]
+      - [0x22390, asm]
+      - [0x223E0, asm]
+      - [0x22490, asm]
+      - [0x22580, asm]
+      - [0x22670, asm]
+      - [0x22820, asm]
+      - [0x22840, asm]
+      - [0x22910, asm]
+      - [0x22A30, asm]
+      - [0x22AF0, asm]
+      - [0x22B30, asm]
+      - [0x22B80, asm]
+      - [0x22C10, asm]
+      - [0x22D40, asm]
+      - [0x23060, asm]
+      - [0x23120, asm]
+      - [0x23180, asm, kernel_end]
+      - [0x231D0, bin, main_gap]
+      - [0x321D0, asm, engine_start]
+      - [0x32350, asm, engine_logic]
+      - [0x32470, asm, big_chunk]
+
+  - type: bin
+    start: 0x100000 
+
+  - [0x2000000] # End of ROM

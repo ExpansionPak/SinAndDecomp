@@ -1,0 +1,28 @@
+# --- Build Artifacts ---
+build/
+*.o
+*.elf
+*.map
+*.ld
+
+# Block the baserom and any ROM files
+*.z64
+*.v64
+*.n64
+baserom/
+
+# Block the extracted asset blobs
+assets/
+
+# Block the generated assembly (Users should run splat themselves)
+asm/
+
+# --- Splat/Tooling Metadata ---
+.splat_cache/
+undefined_funcs_auto.txt
+undefined_syms_auto.txt
+
+# --- System/Python Files ---
+.venv/
+__pycache__/
+.DS_Store
